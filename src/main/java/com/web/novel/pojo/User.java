@@ -5,7 +5,11 @@ public class User {
 
     private String userName;
 
-    private String userPwd;
+    private String userAcount;
+
+    private String facebookId;
+
+    private String userStatus;
 
     public Integer getUserId() {
         return userId;
@@ -23,11 +27,27 @@ public class User {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getUserPwd() {
-        return userPwd;
+    public String getUserAcount() {
+        return userAcount;
     }
 
-    public void setUserPwd(String userPwd) {
-        this.userPwd = userPwd == null ? null : userPwd.trim();
+    public void setUserAcount(String userAcount) {
+        this.userAcount = userAcount == null ? null : userAcount.trim();
+    }
+
+    public String getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId == null ? null : facebookId.trim();
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus == null ? null : userStatus.trim();
     }
 }

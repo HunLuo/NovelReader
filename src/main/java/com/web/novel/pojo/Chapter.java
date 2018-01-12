@@ -7,6 +7,8 @@ public class Chapter {
 
     private String chapterName;
 
+    private Integer chapterNumber;
+
     private String chapterUrl;
 
     public Integer getChapterId() {
@@ -31,6 +33,14 @@ public class Chapter {
 
     public void setChapterName(String chapterName) {
         this.chapterName = chapterName == null ? null : chapterName.trim();
+    }
+
+    public Integer getChapterNumber() {
+        return chapterNumber;
+    }
+
+    public void setChapterNumber(Integer chapterNumber) {
+        this.chapterNumber = chapterNumber;
     }
 
     public String getChapterUrl() {
