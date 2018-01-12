@@ -7,9 +7,15 @@ public class Book {
 
     private String bookUrl;
 
+    private String bookDescription;
+
     private String bookOldPrice;
 
     private String bookNewPrice;
+
+    private Integer bookReadAmount;
+
+    private Integer bookBuyAmount;
 
     public Integer getBookId() {
         return bookId;
@@ -35,6 +41,14 @@ public class Book {
         this.bookUrl = bookUrl == null ? null : bookUrl.trim();
     }
 
+    public String getBookDescription() {
+        return bookDescription;
+    }
+
+    public void setBookDescription(String bookDescription) {
+        this.bookDescription = bookDescription == null ? null : bookDescription.trim();
+    }
+
     public String getBookOldPrice() {
         return bookOldPrice;
     }
@@ -49,5 +63,21 @@ public class Book {
 
     public void setBookNewPrice(String bookNewPrice) {
         this.bookNewPrice = bookNewPrice == null ? null : bookNewPrice.trim();
+    }
+
+    public Integer getBookReadAmount() {
+        return bookReadAmount;
+    }
+
+    public void setBookReadAmount(Integer bookReadAmount) {
+        this.bookReadAmount = bookReadAmount;
+    }
+
+    public Integer getBookBuyAmount() {
+        return bookBuyAmount;
+    }
+
+    public void setBookBuyAmount(Integer bookBuyAmount) {
+        this.bookBuyAmount = bookBuyAmount;
     }
 }

@@ -13,22 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/")
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
 
 
-    @RequestMapping("login.do")
-    @ResponseBody
-    public String login(User loginUser) {
-        Result result = userService.registerNewUser(loginUser);
-        return result.getMessage();
-    }
 
-    @RequestMapping("register.do")
-    @ResponseBody
-    public String register(User registerUser) {
-        Result result = userService.registerNewUser(registerUser);
-        return result.getMessage();
-    }
 
 
 }

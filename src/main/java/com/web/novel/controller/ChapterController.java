@@ -1,28 +1,26 @@
 package com.web.novel.controller;
 
 import com.google.gson.Gson;
-import com.web.novel.pojo.Book;
-import com.web.novel.service.BookService;
+import com.web.novel.pojo.Chapter;
+import com.web.novel.service.ChapterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Controller
-@RequestMapping("/")
-public class BookController {
-    @Autowired
-    private BookService bookService;
+import java.util.List;
 
-    @RequestMapping("get-book-details.do")
+@Controller
+public class ChapterController {
+    @Autowired
+    private ChapterService chapterService;
+
+    @RequestMapping("get-chapter-list.do")
     @ResponseBody
-    public String getBookDetails(int bookId) {
-        Book book = bookService.getOneBookById(bookId);
+    public String getChapterList(int bookId){
+        List<Chapter> chapterList =  chapterService.getChapters(bookId);
         Gson gson = new Gson();
-        String result = gson.toJson(book);
+        String result =  gson.toJson(chapterList);
         return result;
     }
-
-
-
 }

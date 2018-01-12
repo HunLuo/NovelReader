@@ -11,9 +11,9 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.web.novel.pojo.User" >
-    insert into novel_user (user_name, user_pwd
+    insert into novel_user (user_id, user_name, user_pwd
       )
-    values ( #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPwd,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.web.novel.pojo.User" >
@@ -26,11 +26,6 @@
     select user_id, user_name, user_pwd
     from novel_user
     where user_id = #{userId,jdbcType=INTEGER}
-  </select>
-  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select user_id, user_name, user_pwd
-    from novel_user
-    where user_name = #{userName,jdbcType=String}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select user_id, user_name, user_pwd
