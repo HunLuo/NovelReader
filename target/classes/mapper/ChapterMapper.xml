@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.web.novel.dao.ChapterMapper" >
+  <resultMap id="BaseResultMap" type="com.web.novel.pojo.Chapter" >
+    <id column="chapter_id" property="chapterId" jdbcType="INTEGER" />
+    <result column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="chapter_name" property="chapterName" jdbcType="VARCHAR" />
+    <result column="chapter_number" property="chapterNumber" jdbcType="INTEGER" />
+    <result column="chapter_url" property="chapterUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from novel_chapter
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.web.novel.pojo.Chapter" >
+    insert into novel_chapter (chapter_id, book_id, chapter_name, 
+      chapter_number, chapter_url)
+    values (#{chapterId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{chapterName,jdbcType=VARCHAR}, 
+      #{chapterNumber,jdbcType=INTEGER}, #{chapterUrl,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.web.novel.pojo.Chapter" >
+    update novel_chapter
+    set book_id = #{bookId,jdbcType=INTEGER},
+      chapter_name = #{chapterName,jdbcType=VARCHAR},
+      chapter_number = #{chapterNumber,jdbcType=INTEGER},
+      chapter_url = #{chapterUrl,jdbcType=VARCHAR}
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select chapter_id, book_id, chapter_name, chapter_number, chapter_url
+    from novel_chapter
+    where chapter_id = #{chapterId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByBookId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select chapter_id, book_id, chapter_name, chapter_number, chapter_url
+    from novel_chapter
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select chapter_id, book_id, chapter_name, chapter_number, chapter_url
+    from novel_chapter
+  </select>
+</mapper>

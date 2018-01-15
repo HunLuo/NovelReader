@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="author" content="duanliang, duanliang920.com" />
+		<title></title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/page.css" />
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div id="book-details">
+				<div class="row">
+					<div class="col-xs-12">
+						<img src="img/topbar.png" class="img-responsive" />
+					</div>
+				</div>
+				<div class="space"></div>
+				<div class="row common-padding">
+
+					<div class="col-xs-3  right-border">
+						<div class="common-text data">
+							¥{{ item.bookOldPrice }}
+						</div>
+						<div class="common-text">
+							原价
+						</div>
+					</div>
+
+					<div class="col-xs-3  right-border">
+						<div class="common-text data">
+							¥{{ item.bookNewPrice }}
+						</div>
+						<div class="common-text">
+							现价
+						</div>
+					</div>
+					<div class="col-xs-3  right-border">
+
+						<div class="common-text data">
+							{{ item.bookReadAmount }}
+						</div>
+						<div class="common-text">
+							阅读量
+						</div>
+
+					</div>
+					<div class="col-xs-3 ">
+						<div class="common-text data">{{ item.bookBuyAmount }}</div>
+						<div class="common-text">购买量</div>
+
+					</div>
+
+				</div>
+				<div class="space"></div>
+				<div class="row">
+					<div class="details common-padding">
+						<span class="details-text">
+					{{ item.bookDescription }}
+						<a href="#">
+							详情＞
+						</a>
+					</span>
+					</div>
+
+				</div>
+			</div>
+			<div class="space"></div>
+			<div class="row">
+				<div id="contents" class="">
+					<div class="contents-title common-text">
+						目录
+					</div>
+					<div class="line">
+
+					</div>
+					<ul class="contents-list" id="chapter-list">
+
+						<li v-for="item in items">
+							<a :href="'read.html?chapterId=' + item.chapterId">
+								
+								<span>{{ item.chapterName }}</span> <span style="float: right;">免费</span>
+							</a>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+			<div class="row navbar-fixed-bottom">
+
+				<div id="button">
+					<button class="btn btn-danger btn-block">立即购买</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script>
+		var data;
+		$(document).ready(function() {
+			getBookDetails();
+			getChapterList();
+		})
+
+		function getChapterList() {
+			var chapterList = new Vue({
+					el: '#chapter-list',
+					data: {
+						items: []
+					},
+					beforeCreate: function() {
+						var _self = this;
+						$.ajax({
+							type: "get",
+							url: "get-chapter-list.do?bookId=1",
+							async: true,
+							success: function(result) {
+								_self.items = $.parseJSON(result);
+
+							}
+						});
+
+					}
+				}
+
+			)
+
+		}
+
+		function getBookDetails() {
+			var bookDetails = new Vue({
+					el: '#book-details',
+					data: {
+						item: {}
+					},
+					beforeCreate: function() {
+						var _self = this;
+						$.ajax({
+							type: "get",
+							url: "get-book-details.do?bookId=1",
+							async: true,
+							success: function(result) {
+								_self.item = $.parseJSON(result);
+								console.log(_self.item);
+
+							}
+						});
+
+					}
+				}
+
+			)
+
+		}
+	</script>
+
+</html>
