@@ -6,6 +6,7 @@ import com.web.novel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -14,7 +15,11 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     public Boolean addUser(String userName, String facebookId, String status) {
-        int affectRow = userMapper.insert(userName, facebookId, status);
+        HashMap<String, Object> maps = new HashMap<String,Object>();
+        maps.put("userName", userName);
+        maps.put("facebookId", facebookId);
+        maps.put("status", status);
+        int affectRow = userMapper.insert(maps);
         if (affectRow > 0) {
             return true;
         }
@@ -33,8 +38,13 @@ public class UserServiceImpl implements UserService {
         return userMapper.selectAll();
     }
 
-    public Boolean updateByPrimaryKey(Integer userId, String userName, String facebookId) {
-        int affectRow = userMapper.updateByPrimaryKey(userId, userName, facebookId);
+    public Boolean updateByPrimaryKey(Integer userId, String userName, String facebookId,String status) {
+
+        User user =new User();
+        user.setFacebookId(facebookId);
+        user.setUserId(userId);
+        user.setUserName(userName);
+        int affectRow = userMapper.updateByPrimaryKey(user);
         if (affectRow > 0) {
             return true;
         }
@@ -42,7 +52,10 @@ public class UserServiceImpl implements UserService {
     }
 
     public Boolean updateByFacebookIdStatus(String facebookId, String status) {
-        int affectRow = userMapper.updateByFacebookIdStatus(facebookId, status);
+        HashMap<String, Object> maps = new HashMap<String,Object>();
+        maps.put("facebookId", facebookId);
+        maps.put("status", status);
+        int affectRow = userMapper.updateByFacebookIdStatus(maps);
         if (affectRow > 0) {
             return true;
         }
@@ -64,6 +77,8 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+
 
 
 }

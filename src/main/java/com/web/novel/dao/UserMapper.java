@@ -3,11 +3,12 @@ package com.web.novel.dao;
 import com.web.novel.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    int insert(String userName, String facebookId, String status);
+    int insert(HashMap<String, Object> map);
 
     User selectByPrimaryKey(Integer userId);
 
@@ -15,9 +16,9 @@ public interface UserMapper {
 
     List<User> selectAll();
 
-    int updateByPrimaryKey(Integer userId, String userName, String facebookId);
+    int updateByPrimaryKey(User user);
 
-    int updateByFacebookIdStatus(String facebookId, String status);
+    int updateByFacebookIdStatus(HashMap<String, Object> map);
 
     int deleteByPrimaryKey(String userId);
 

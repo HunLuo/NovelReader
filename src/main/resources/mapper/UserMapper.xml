@@ -15,22 +15,22 @@
     delete from novel_user
     where facebook_id = #{facebookId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert"  >
+  <insert id="insert"  parameterType="java.util.HashMap">
     insert into novel_user (user_name, facebook_id,status
-      )
-    values (#{0}, #{1}, #{2}
-      )
+    )
+    values (#{userName}, #{facebookId}, #{status}
+    )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.web.novel.pojo.User" >
     update novel_user
     set user_name = #{userName,jdbcType=VARCHAR},
-        facebook_id = #{facebookId,jdbcType=VARCHAR}
+    facebook_id = #{facebookId,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByFacebookIdStatus" >
+  <update id="updateByFacebookIdStatus" parameterType="java.util.HashMap" >
     update novel_user
-    set status = #{1}
-    where facebook_id = #{0}
+    set status = #{status,jdbcType=VARCHAR}
+    where facebook_id = #{facebookId,jdbcType=VARCHAR}
   </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
