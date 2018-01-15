@@ -5,5 +5,5 @@ import com.web.novel.pojo.Chapter;
 import java.util.List;
 
 public interface ChapterService {
-    public List<Chapter> getChapters(int BookId);
+     List<Chapter> getChapters(int BookId);
 }
