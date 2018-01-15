@@ -16,7 +16,7 @@ public interface UserMapper {
 
     List<User> selectAll();
 
-    int updateByPrimaryKey(User user);
+    int updateByPrimaryKey(User user1);
 
     int updateByFacebookIdStatus(HashMap<String, Object> map);
 
