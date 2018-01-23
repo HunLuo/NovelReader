@@ -2,7 +2,6 @@ package com.web.novel.service.impl;
 
 import com.web.novel.dao.BookMapper;
 import com.web.novel.pojo.Book;
-import com.web.novel.pojo.Result;
 import com.web.novel.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

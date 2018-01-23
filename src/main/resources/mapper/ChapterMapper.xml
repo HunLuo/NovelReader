@@ -7,6 +7,8 @@
     <result column="chapter_name" property="chapterName" jdbcType="VARCHAR" />
     <result column="chapter_number" property="chapterNumber" jdbcType="INTEGER" />
     <result column="chapter_url" property="chapterUrl" jdbcType="VARCHAR" />
+    <result column="chapter_image" property="chapterImage" jdbcType="VARCHAR" />
+    <result column="chapter_is_charge" property="chapterIsCharge" jdbcType="INTEGER" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from novel_chapter
@@ -14,30 +16,40 @@
   </delete>
   <insert id="insert" parameterType="com.web.novel.pojo.Chapter" >
     insert into novel_chapter (chapter_id, book_id, chapter_name, 
-      chapter_number, chapter_url)
+      chapter_number, chapter_url, chapter_image, chapter_is_charge)
     values (#{chapterId,jdbcType=INTEGER}, #{bookId,jdbcType=INTEGER}, #{chapterName,jdbcType=VARCHAR}, 
-      #{chapterNumber,jdbcType=INTEGER}, #{chapterUrl,jdbcType=VARCHAR})
+      #{chapterNumber,jdbcType=INTEGER}, #{chapterUrl,jdbcType=VARCHAR}, #{chapterImage,jdbcType=VARCHAR}, #{chapterIsCharge,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.web.novel.pojo.Chapter" >
     update novel_chapter
     set book_id = #{bookId,jdbcType=INTEGER},
       chapter_name = #{chapterName,jdbcType=VARCHAR},
       chapter_number = #{chapterNumber,jdbcType=INTEGER},
-      chapter_url = #{chapterUrl,jdbcType=VARCHAR}
+      chapter_url = #{chapterUrl,jdbcType=VARCHAR},
+      chapter_image = #{chapterImage,jdbcType=VARCHAR},
+      chapter_is_charge = #{chapterIsCharge,jdbcType=INTEGER}
     where chapter_id = #{chapterId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select chapter_id, book_id, chapter_name, chapter_number, chapter_url
+    select chapter_id, book_id, chapter_name, chapter_number, chapter_url, chapter_image, chapter_is_charge
     from novel_chapter
     where chapter_id = #{chapterId,jdbcType=INTEGER}
   </select>
   <select id="selectByBookId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select chapter_id, book_id, chapter_name, chapter_number, chapter_url
+    select chapter_id, book_id, chapter_name, chapter_number, chapter_url, chapter_image, chapter_is_charge
     from novel_chapter
     where book_id = #{bookId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByIsCharge" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select chapter_id, book_id, chapter_name, chapter_number, chapter_url, chapter_image, chapter_is_charge
+    from novel_chapter
+    where book_id = #{bookId,jdbcType=INTEGER} AND chapter_is_charge = #{isCharge,jdbcType=INTEGER}
+  </select>
+
+
   <select id="selectAll" resultMap="BaseResultMap" >
-    select chapter_id, book_id, chapter_name, chapter_number, chapter_url
+    select chapter_id, book_id, chapter_name, chapter_number, chapter_url, chapter_image, chapter_is_charge
     from novel_chapter
   </select>
 </mapper>

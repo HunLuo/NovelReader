@@ -5,7 +5,7 @@
     <id column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="user_name" property="userName" jdbcType="VARCHAR" />
     <result column="facebook_id" property="facebookId" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="user_status" property="userStatus" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from novel_user
@@ -15,31 +15,31 @@
     delete from novel_user
     where facebook_id = #{facebookId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert"  >
-    insert into novel_user (user_name, facebook_id,status
-      )
-    values (#{0}, #{1}, #{2}
-      )
+  <insert id="insert"  parameterType="java.util.HashMap">
+    insert into novel_user (user_name, facebook_id,user_status
+    )
+    values (#{userName}, #{facebookId}, #{userStatus}
+    )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.web.novel.pojo.User" >
     update novel_user
     set user_name = #{userName,jdbcType=VARCHAR},
-        facebook_id = #{facebookId,jdbcType=VARCHAR}
+    facebook_id = #{facebookId,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByFacebookIdStatus" >
+  <update id="updateByFacebookIdStatus" parameterType="java.util.HashMap" >
     update novel_user
-    set status = #{1}
-    where facebook_id = #{0}
+    set user_status = #{userStatus,jdbcType=VARCHAR}
+    where facebook_id = #{facebookId,jdbcType=VARCHAR}
   </update>
 
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select user_id, user_name, facebook_id,status
+    select user_id, user_name, facebook_id,user_status
     from novel_user
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <select id="selectByFacebookId" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select user_id, user_name, facebook_id,status
+    select user_id, user_name, facebook_id,user_status
     from novel_user
     where facebook_id = #{facebookId,jdbcType=VARCHAR}
   </select>

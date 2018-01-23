@@ -5,8 +5,6 @@ public class User {
 
     private String userName;
 
-    private String userAcount;
-
     private String facebookId;
 
     private String userStatus;
@@ -27,14 +25,6 @@ public class User {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getUserAcount() {
-        return userAcount;
-    }
-
-    public void setUserAcount(String userAcount) {
-        this.userAcount = userAcount == null ? null : userAcount.trim();
-    }
-
     public String getFacebookId() {
         return facebookId;
     }
@@ -48,6 +38,6 @@ public class User {
     }
 
     public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus == null ? null : userStatus.trim();
+        this.userStatus = userStatus;
     }
 }

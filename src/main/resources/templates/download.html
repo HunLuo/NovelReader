@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="author" content="duanliang, duanliang920.com" />
+		<title></title>
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div class="page-header">
+				<h1><small>全文下载</small></h1>
+			</div>
+			<div class="row">
+				<p class="lead text-center">下载即将开始，如无反应，请点击下载按钮</p>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-4">
+
+				</div>
+
+				<div class="col-xs-4" id="form-container">
+
+					<form :action="'download-book.do?bookId='+param" method="post" id="form">
+					<button id="download-button" type="submit" class="btn btn-danger  btn-block">
+						下载
+					</button>
+                    </form>
+
+				</div>
+
+				<div class="col-xs-4">
+
+				</div>
+			</div>
+
+		</div>
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/geturlparams.js"></script>
+		<script>
+
+			$(document).ready(function() {
+				
+				var param = GetQueryString("bookId");
+                init(param);
+                setTimeout(function () { $("#form").submit();}, 2000);
+                
+
+			});
+
+			function init(param) {
+
+                var chapterContent = new Vue({
+                    el: '#form-container',
+                    data: {
+                        param: param
+                    }
+                });
+
+
+
+
+
+
+			}
+		</script>
+	</body>
+
+</html>

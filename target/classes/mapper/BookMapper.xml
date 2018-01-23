@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.web.novel.dao.BookMapper" >
@@ -45,4 +46,53 @@
     book_read_amount, book_buy_amount
     from novel_book
   </select>
+=======
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.web.novel.dao.BookMapper" >
+  <resultMap id="BaseResultMap" type="com.web.novel.pojo.Book" >
+    <id column="book_id" property="bookId" jdbcType="INTEGER" />
+    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+    <result column="book_url" property="bookUrl" jdbcType="VARCHAR" />
+    <result column="book_description" property="bookDescription" jdbcType="VARCHAR" />
+    <result column="book_old_price" property="bookOldPrice" jdbcType="VARCHAR" />
+    <result column="book_new_price" property="bookNewPrice" jdbcType="VARCHAR" />
+    <result column="book_read_amount" property="bookReadAmount" jdbcType="INTEGER" />
+    <result column="book_buy_amount" property="bookBuyAmount" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from novel_book
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.web.novel.pojo.Book" >
+    insert into novel_book (book_id, book_name, book_url, 
+      book_description, book_old_price, book_new_price, 
+      book_read_amount, book_buy_amount)
+    values (#{bookId,jdbcType=INTEGER}, #{bookName,jdbcType=VARCHAR}, #{bookUrl,jdbcType=VARCHAR}, 
+      #{bookDescription,jdbcType=VARCHAR}, #{bookOldPrice,jdbcType=VARCHAR}, #{bookNewPrice,jdbcType=VARCHAR}, 
+      #{bookReadAmount,jdbcType=INTEGER}, #{bookBuyAmount,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.web.novel.pojo.Book" >
+    update novel_book
+    set book_name = #{bookName,jdbcType=VARCHAR},
+      book_url = #{bookUrl,jdbcType=VARCHAR},
+      book_description = #{bookDescription,jdbcType=VARCHAR},
+      book_old_price = #{bookOldPrice,jdbcType=VARCHAR},
+      book_new_price = #{bookNewPrice,jdbcType=VARCHAR},
+      book_read_amount = #{bookReadAmount,jdbcType=INTEGER},
+      book_buy_amount = #{bookBuyAmount,jdbcType=INTEGER}
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select book_id, book_name, book_url, book_description, book_old_price, book_new_price, 
+    book_read_amount, book_buy_amount
+    from novel_book
+    where book_id = #{bookId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select book_id, book_name, book_url, book_description, book_old_price, book_new_price, 
+    book_read_amount, book_buy_amount
+    from novel_book
+  </select>
+>>>>>>> team/master
 </mapper>

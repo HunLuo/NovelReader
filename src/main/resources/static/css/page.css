@@ -3,7 +3,7 @@ font-size:1mm;
 } 
 body{
 	overflow-x: hidden;
-	background-color: #eee;
+	/*background-color: #eee;*/
 	height: 20%;
 }
 
@@ -47,7 +47,6 @@ li{
 .contents-title{
 	margin: 0.3rem;
 	vertical-align: middle;
-	
 }
 
 .line{
@@ -62,10 +61,10 @@ li{
 }
   
 .details{
-	height: 7rem;
+	/*height: 7rem;*/
 	
 }
 
 .details-text{
-	font-size: 0.8rem;
+	font-size: 4rem;
 }

@@ -27,6 +27,11 @@
     from novel_user_book
     where user_book_id = #{userBookId,jdbcType=INTEGER}
   </select>
+  <select id="selectByUserIdAndBookId" resultMap="BaseResultMap" >
+    select user_book_id, user_id, book_id
+    from novel_user_book
+    where user_id= #{userId,jdbcType=INTEGER} AND book_id= #{bookId,jdbcType=INTEGER}
+  </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select user_book_id, user_id, book_id
     from novel_user_book

@@ -2,6 +2,7 @@ package com.web.novel.service.impl;
 
 import com.web.novel.dao.UserBookMapper;
 
+import com.web.novel.pojo.User;
 import com.web.novel.pojo.UserBook;
 import com.web.novel.service.UserBookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,4 +21,14 @@ public class UserBookServiceImpl implements UserBookService {
         }
         return false;
     }
+
+
+    public Boolean isBought(int userId, int bookId){
+        UserBook userBook =  userBookMapper.selectByUserIdAndBookId(userId,bookId);
+        if (userBook!=null){
+            return true;
+        }
+        return false;
+    }
+
 }

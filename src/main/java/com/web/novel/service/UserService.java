@@ -1,6 +1,5 @@
 package com.web.novel.service;
 
-import com.web.novel.pojo.Result;
 import com.web.novel.pojo.User;
 
 import java.util.List;
@@ -15,7 +14,7 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    Boolean updateByPrimaryKey(Integer userId, String userName, String facebookId);
+    Boolean updateByPrimaryKey(Integer userId, String userName, String facebookId,String status);
 
     Boolean updateByFacebookIdStatus(String facebookId, String status);
 

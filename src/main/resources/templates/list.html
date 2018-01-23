@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="author" content="duanliang, duanliang920.com" />
+		<title></title>
+		<link rel="stylesheet" href="css/common.css" />
+		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/list.css" />
+		
+	</head>
+
+	<body>
+		<div class="container-fluid">
+			<div id="list-container" v-cloak>
+				<div class="row">
+					<div class="header-bar">
+						<div class="col-xs-2">
+							<a id="back-home" href="index.html" class="glyphicon glyphicon-menu-left" aria-hidden="true"></a>
+						</div>
+						<div class="col-xs-8">
+
+							<span>{{ items.bookName }}</span>
+
+						</div>
+
+					</div>
+
+				</div>
+				<div class="row">
+
+					<div class="list-group">
+						<template v-for="item in items.list">
+							<template v-if="item.chapterIsCharge == 0">
+								<a :href="'read.html?chapterId=' + item.chapterId" class="list-group-item">
+									<span>{{ item.chapterName }}</span>
+								</a>
+							</template>
+							<template v-else>
+								<a href="#" class="list-group-item disabled">
+									<span>{{ item.chapterName }}</span> <span class="glyphicon glyphicon-lock pull-right" aria-hidden="true"></span>
+								</a>
+							</template>
+						</template>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/vue.min.js"></script>
+		<script type="text/javascript" src="js/geturlparams.js"></script>
+		<script>
+			$(document).ready(function() {
+				var bookId = GetQueryString('bookId');
+				getChapters(bookId);
+			});
+
+			function getChapters(bookId) {
+				var chapterContent = new Vue({
+					el: '#list-container',
+					data: {
+						items: {}
+					},
+					beforeCreate: function() {
+						var _self = this;
+						$.ajax({
+							type: "get",
+							url: "get-chapter-list.do?bookId=" + bookId,
+							async: true,
+							success: function(result) {
+								_self.items = $.parseJSON(result);
+								_self.items.list = $.parseJSON(_self.items.list);
+
+							}
+						});
+
+					}
+				})
+
+			}
+		</script>
+	</body>
+
+</html>

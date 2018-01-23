@@ -11,6 +11,10 @@ public class Chapter {
 
     private String chapterUrl;
 
+    private String chapterImage;
+
+    private Integer chapterIsCharge;
+
     public Integer getChapterId() {
         return chapterId;
     }
@@ -49,5 +53,21 @@ public class Chapter {
 
     public void setChapterUrl(String chapterUrl) {
         this.chapterUrl = chapterUrl == null ? null : chapterUrl.trim();
+    }
+
+    public String getChapterImage() {
+        return chapterImage;
+    }
+
+    public void setChapterImage(String chapterImage) {
+        this.chapterImage = chapterImage;
+    }
+
+    public Integer getChapterIsCharge() {
+        return chapterIsCharge;
+    }
+
+    public void setChapterIsCharge(Integer chapterIsCharge) {
+        this.chapterIsCharge = chapterIsCharge;
     }
 }

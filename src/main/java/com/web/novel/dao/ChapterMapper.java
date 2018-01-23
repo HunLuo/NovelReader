@@ -2,6 +2,7 @@ package com.web.novel.dao;
 
 import com.web.novel.pojo.Chapter;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,6 +15,8 @@ public interface ChapterMapper {
     Chapter selectByPrimaryKey(Integer chapterId);
 
     List<Chapter> selectByBookId(Integer bookId);
+
+    List<Chapter> selectByIsCharge(@Param("bookId") Integer bookId,@Param("isCharge") Integer isCharge);
 
     List<Chapter> selectAll();
 

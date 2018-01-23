@@ -17,6 +17,8 @@ public class Book {
 
     private Integer bookBuyAmount;
 
+    private String bookImage;
+
     public Integer getBookId() {
         return bookId;
     }
@@ -79,5 +81,13 @@ public class Book {
 
     public void setBookBuyAmount(Integer bookBuyAmount) {
         this.bookBuyAmount = bookBuyAmount;
+    }
+
+    public String getBookImage() {
+        return bookImage;
+    }
+
+    public void setBookImage(String bookImage) {
+        this.bookImage = bookImage;
     }
 }

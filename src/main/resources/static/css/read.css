@@ -1,0 +1,13 @@
+.header-bar{
+	height: 4.2rem;
+	font-size: 2rem;
+
+	text-align: center;
+	line-height: 4.2rem;
+	border-bottom: solid black 0.1rem;
+}
+
+#back-home{
+ text-decoration:none;
+    color:black;
+}

@@ -11,24 +11,79 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
 		<meta name="author" content="duanliang, duanliang920.com" />
 		<title></title>
+		<link rel="stylesheet" href="css/common.css" />
 		<link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="css/page.css" />
+		<link rel="stylesheet" href="css/read.css" />
+	
 	</head>
 
 	<body>
-		<div class="container-fluid">
+		<div id="content-container" v-cloak>
 			<div class="row">
-				<div class="col-xs-12" >
-					<div id="image-container">
-						<img src="img/topbar.png" class="img-responsive" />
+				<div class="header-bar">
+					<div class="col-xs-2">
+						<a id="back-home" href="index.html" class="glyphicon glyphicon-menu-left" aria-hidden="true"></a>
+					</div>
+					<div class="col-xs-8">
+
+						<span>{{ item.bookName }}</span>
+
+					</div>
+
+				</div>
+
+			</div>
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-xs-12">
+						<div id="image-container">
+							<img :src="item.imgUrl" class="img-responsive" />
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12">
-					<div id="content-container">
-						{{ item }}
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="container" v-html='item.content'>
+
+						</div>
 					</div>
+				</div>
+				<div class="row">
+					<div class="container">
+						<div class="col-xs-4">
+							<div v-if="item.lastChapter">
+								<center>
+									<a :href="'read.html?chapterId='+(item.chapterId-1)" class="btn btn-default"><span aria-hidden="true">&larr;</span> 上一章</a>
+								</center>
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<center>
+								<div v-if="item.isCharge">
+									<form :action="'/pay?bookId='+item.bookId" method="post" >
+										<button type="submit" class="btn btn-danger">立即购买</button>
+
+									</form>
+
+								</div>
+								<div v-else>
+
+									<a :href="'list.html?bookId='+item.bookId" class="btn btn-danger">目录</a>
+								</div>
+							</center>
+						</div>
+						<div class="col-xs-4">
+							<div v-if="item.nextChapter">
+								<center>
+									<a :href="'read.html?chapterId='+(item.chapterId+1)" class="btn btn-default">下一章 <span aria-hidden="true">&rarr;</span></a>
+								</center>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<br />
 				</div>
 			</div>
 		</div>
@@ -36,33 +91,34 @@
 
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/vue.js"></script>
+	<script type="text/javascript" src="js/vue.min.js"></script>
 	<script type="text/javascript" src="js/geturlparams.js"></script>
 	<script>
 		$(document).ready(function() {
 			var chapterId = GetQueryString('chapterId');
 			getChapterContent(chapterId);
 		})
+
 		function getChapterContent(chapterId) {
 			var chapterContent = new Vue({
-					el: '#content-container',
-					data: {
-						item: {}
-					},
-					beforeCreate: function() {
-						var _self = this;
-						$.ajax({
-							type: "get",
-							url: "get-content.do?chapterId="+chapterId,
-							async: true,
-							success: function(result) {
-								_self.item = result;
-								console.log(_self.item);
+				el: '#content-container',
+				data: {
+					item: {}
+				},
+				beforeCreate: function() {
+					var _self = this;
+					$.ajax({
+						type: "get",
+						url: "get-content.do?chapterId=" + chapterId,
+						async: true,
+						success: function(result) {
+							_self.item = $.parseJSON(result);
+							console.log(_self.item);
 
-							}
-						});
+						}
+					});
 
-					}
+				}
 			})
 
 		}
